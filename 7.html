@@ -98,23 +98,28 @@
           action($index);
         })
 
+        function returnIndex(bool){
+          if(bool){
+            $index += 1;
+            if($index > $len - 1) {$index = 0};
+          }else{
+            $index -= 1;
+            if($index < 0) {$index = $len - 1};
+          }
+          return $index;
+        }
+
         $('.btn span').eq(0).click(function(){
-          $index -= 1;
-          if($index < 0) {$index = $len - 1};
-          action($index);
+          action(returnIndex(0));
         })
 
         $('.btn span').eq(1).click(function(){
-          $index += 1;
-          if($index > $len - 1) {$index = 0};
-          action($index);
+          action(returnIndex(1));
         })
 
         function Interval(){
           timer = setInterval(function(){
-            $index += 1;
-            if($index > $len - 1) {$index = 0};
-            action($index);
+            action(returnIndex(1));
           },2000)
         }
 
