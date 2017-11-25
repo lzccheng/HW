@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <title></title>
+
+    <style media="screen">
+      *{
+        margin:0;
+        padding:0;
+        border:none;
+      }
+      ul{
+        list-style:none
+      }
+      .box{
+        position:relative;
+        width: 790px;
+        height:340px;
+        margin:50px auto;
+      }
+      .box:hover .btn span{
+        background-color: rgba(0 , 0, 0, 0.2);
+      }
+      .banner ul li{
+        position:absolute;
+        left:0;
+        top:0;
+        display: none;
+      }
+      .banner ul li:nth-child(1){
+        display: block;
+      }
+      .btn{
+        width: 100%;
+        position: absolute;
+        top:50%;
+        margin-top:-30px;
+      }
+      .btn span{
+        display: inline-block;
+        width:30px;
+        height:60px;
+        color:#ffffff;
+        line-height: 60px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        cursor:pointer;
+      }
+      .btn span.span:hover{
+        background-color: rgba(0 , 0, 0, 0.5);
+      }
+      .btn span:nth-child(1){
+        float: left;
+      }
+      .btn span:nth-child(2){
+        float: right;
+      }
+      .list{
+        width: 160px;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        top: 300px;
+        margin-left:-80px;
+        border-radius:15px;
+        text-align: center;
+        background-color: rgba(255,255, 255, 0.3);
+        cursor: default;
+      }
+      .list span{
+        display: inline-block;
+        width:12px;
+        height:12px;
+        margin:4px 1px;
+        border-radius: 100%;
+        background-color: #fff;
+      }
+      .box .list .active{
+        background-color: red;
+      }
+    </style>
+
+    <script type="text/javascript">
+      $(function(){
+        var $index = 0;
+        var $len = $('.banner ul li').length;
+
+        function action($index){
+          $('.list span').eq($index).addClass('active').siblings().removeClass('active');
+          $('.banner ul li').eq($index).fadeIn().siblings().fadeOut();
+        }
+
+        $('.list span').mouseenter(function(){
+          $index = $(this).index();
+          action($index);
+        })
+
+        $('.btn span').eq(0).click(function(){
+          $index -= 1;
+          if($index < 0) {$index = $len - 1};
+          action($index);
+        })
+
+        $('.btn span').eq(1).click(function(){
+          $index += 1;
+          if($index > $len - 1) {$index = 0};
+          action($index);
+        })
+
+        function Interval(){
+          timer = setInterval(function(){
+            $index += 1;
+            if($index > $len - 1) {$index = 0};
+            action($index);
+          },2000)
+        }
+
+        Interval()
+
+        $('.box').hover(function(){
+          clearInterval(timer)
+        },function(){
+          Interval()
+        })
+      })
+
+    </script>
+  </head>
+  <body>
+      <div class="box">
+        <div class="banner">
+          <ul>
+            <li>
+              <a href="#">
+                <img alt="" src="http://img11.360buyimg.com/da/jfs/t12475/12/975448185/144995/373f7096/5a17ba43Nec8f12ba.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="" src="http://img11.360buyimg.com/da/jfs/t4555/322/3589886827/142359/66551a05/58ffffefN9f8e7e87.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="" src="http://img13.360buyimg.com/da/jfs/t12238/58/343997734/76562/336432ea/5a096cefN2295f4c5.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="#" src="http://img12.360buyimg.com/babel/jfs/t13498/281/990907608/99282/652e0b1d/5a17969cN786481b1.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="" src="http://img20.360buyimg.com/da/jfs/t10597/214/1767280119/107853/e81bef25/59e5deffN82945fbf.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="果味美鲜到家" src="http://img14.360buyimg.com/babel/jfs/t12607/168/583996993/109340/c3001408/5a0e8a51N33deff0a.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="11.25-周五鲜放价" src="http://img10.360buyimg.com/babel/jfs/t13729/215/880334569/143235/267e3970/5a155b40Nec28b476.jpg">
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                <img alt="11.25-11.28-果蔬" src="http://img11.360buyimg.com/babel/jfs/t13960/337/860229763/60126/a9166f2a/5a153c78N587b6883.jpg">
+              </a>
+            </li>
+
+
+          </ul>
+        </div>
+        <div class="btn">
+          <span class="span">&lt;</span>
+          <span class="span" id="right">&gt;</span>
+        </div>
+        <div class="list">
+          <span class="active"></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+  </body>
+</html>
